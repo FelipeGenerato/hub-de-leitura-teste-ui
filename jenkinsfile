@@ -7,7 +7,7 @@ pipeline{
         stage("Clonar o hub de leitura integrado" ) {
             steps {
                 bat 'if exist hub-de-leitura-integrado rmdir /s /q hub-de-leitura-integrado'
-                bat 'git clone https://github.com/EBAC-QE/hub-de-leitura-integrado.git'
+                bat 'git clone --depth 1 https://github.com/EBAC-QE/hub-de-leitura-integrado.git'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline{
             steps {
                    bat '''
                         if exist hub-de-leitura-teste-ui rmdir /s /q hub-de-leitura-teste-ui
-                        git clone https://github.com/FelipeGenerato/hub-de-leitura-teste-ui.git
+                        git clone --depth 1 https://github.com/FelipeGenerato/hub-de-leitura-teste-ui.git
                    '''
                 
             }
@@ -51,6 +51,7 @@ pipeline{
 
     post{
         always {
+            archiveArtifacts artifacts: 'cypress\screenshots/**/*.*,cypress\videos/**/*.*', allowEmptyArchive: true
             bat 'taskkill /F /IM node.exe || exit 0'
         }
     }
