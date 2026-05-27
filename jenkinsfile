@@ -6,7 +6,7 @@ pipeline{
 
         stage("Clonar o hub de leitura integrado" ) {
             steps {
-                bat 'git clone https://github.com/EBAC-QE/hub-de-leitura-integrado2.git'
+                bat 'git clone https://github.com/EBAC-QE/hub-de-leitura-integrado.git'
             }
         }
 
